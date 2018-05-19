@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/Davlis/movie-db-rest-api#readme",
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-import": "^2.12.0",
     "nodemon": "^1.17.4"
   },
   "dependencies": {
@@ -26,5 +30,27 @@
     "express": "^4.16.3",
     "mongoose": "^5.1.1",
     "morgan": "^1.9.0"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "comma-dangle": 0,
+      "consistent-return": 0,
+      "no-param-reassign": 0,
+      "no-underscore-dangle": 0,
+      "no-shadow": 0,
+      "no-console": 0,
+      "no-plusplus": 0,
+      "no-unused-expressions": 0,
+      "chai-friendly/no-unused-expressions": 2
+    },
+    "env": {
+      "jasmine": true,
+      "mocha": true,
+      "node": true
+    },
+    "plugins": [
+      "chai-friendly"
+    ]
   }
 }
