@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 
 const schema = new mongoose.Schema({
   title: {
@@ -11,5 +12,7 @@ const schema = new mongoose.Schema({
     type: Object
   }
 });
+
+schema.plugin(mongoosePaginate);
 
 export default mongoose.model('Movie', schema);

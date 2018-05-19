@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 
 const schema = new mongoose.Schema({
-  movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' },
+  movieId: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' },
   body: String,
 });
+
+schema.plugin(mongoosePaginate);
 
 export default mongoose.model('Comment', schema);
