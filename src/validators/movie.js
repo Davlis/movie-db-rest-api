@@ -3,13 +3,13 @@ import Joi from 'joi';
 export default {
   create: {
     body: {
-      title: Joi.string().required()
+      title: Joi.string().required().length(3),
     }
   },
   list: {
     query: {
       offset: Joi.number().integer().min(0).default(0),
-      limit: Joi.number().integer().min(1).default(20)
+      limit: Joi.number().integer().min(1).default(20),
     }
   },
   one: {
