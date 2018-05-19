@@ -3,7 +3,7 @@ import Joi from 'joi';
 export default {
   create: {
     body: {
-      title: Joi.string().required().length(3),
+      title: Joi.string().required()
     }
   },
   list: {

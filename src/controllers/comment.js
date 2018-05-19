@@ -7,5 +7,5 @@ export async function one(req, res) {
 }
 
 export async function create(req, res) {
-  res.json('Not Imlemented');
+  res.json('Not Implemented');
 }

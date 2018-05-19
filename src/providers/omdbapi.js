@@ -1,11 +1,16 @@
 import OmdbApi from 'omdb-api-pt';
+import getConfig from '../config';
 
 const omdb = new OmdbApi({
-  apiKey: process.env.OMDB_API_KEY
+  apiKey: getConfig().omdbapi.key
 });
 
-export default function searchByTitle(title) {
-  return omdb.byId({
+export default async function searchByTitle(title) {
+  const data = await omdb.byId({
     title
   });
+  if (data.Error) {
+    return null;
+  }
+  return data;
 }

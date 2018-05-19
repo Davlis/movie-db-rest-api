@@ -1,7 +1,7 @@
-import comment from './comment';
-import movie from './movie';
+import Comment from './comment';
+import Movie from './movie';
 
 export {
-  comment,
-  movie
+  Comment,
+  Movie
 };

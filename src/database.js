@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
-import { comment, movie } from './models';
+import { Comment, Movie } from './models';
 
 export default (config) => {
   mongoose.connect(config.mongo.url);
 
   const models = {
-    movie,
-    comment
+    Movie,
+    Comment
   };
 
   return {
