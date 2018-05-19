@@ -1,4 +1,4 @@
-export async function all(req, res) {
+export async function list(req, res) {
   res.json('Not Implemented');
 }
 

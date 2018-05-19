@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { errorWrap } from '../utils';
 import * as commentController from '../controllers/comment';
+import validate from '../middlewares/validate';
+import validationSchema from '../validators/comment';
 
 const router = Router();
 
-router.post('/', errorWrap(commentController.create));
-router.get('/', errorWrap(commentController.all));
-router.get('/:id', errorWrap(commentController.one));
+router.post('/', validate(validationSchema.create), errorWrap(commentController.create));
+router.get('/', validate(validationSchema.list), errorWrap(commentController.list));
+router.get('/:id', validate(validationSchema.one), errorWrap(commentController.one));
 
 export default router;

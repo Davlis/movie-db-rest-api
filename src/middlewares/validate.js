@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { badRequest } from 'boom';
 
-module.exports = (schema) => {
+export default (schema) => {
   return (req, res, next) => {
     if (schema.params) {
       const validation = Joi.validate(req.params, schema.params, { abortEarly: false, stripUnknown: true });
