@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
   title: {
     required: true,
-    type: String
+    type: String,
+    index: { unique: true }
   },
   data: {
     required: false,
