@@ -1,6 +1,6 @@
 import { notFound } from 'boom';
-import omdbapi from '../providers/omdbapi';
 import { assertOrThrow } from '../utils';
+import omdbapi from '../providers/omdbapi';
 
 export async function list(req, res) {
   const { offset, limit } = req.query;
