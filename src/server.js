@@ -3,7 +3,9 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import generateConfig from './config';
 import router from './routes';
+
 import errorHandler from './middlewares/negativeResponse';
+import noRouteHandler from './middlewares/noRoute';
 
 const config = generateConfig();
 
@@ -22,7 +24,9 @@ export default function initApp(config) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(router);
+
   app.use(errorHandler);
+  app.use(noRouteHandler);
 
   return app;
 }

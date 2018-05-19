@@ -6,6 +6,6 @@ import commentRoutes from './comment';
 const router = Router();
 
 router.use('/movies', movieRoutes);
-router.use('/home', commentRoutes);
+router.use('/comments', commentRoutes);
 
 export default router;

@@ -1,32 +1,17 @@
-const DEFAULT_ERROR_STATUS = 400;
-const DEFAULT_MESSAGE = 'Bad request';
-
-const enviroment = process.env.NODE_ENV || 'development';
-
 export default (error, req, res, next) => {
-  if (error) {
-    const status = (error.isBoom ? error.output.statusCode : error.status) || DEFAULT_ERROR_STATUS;
-    const message = (error.isBoom ? error.output.payload.message : error.message) || error;
+  if (error.isBoom) {
+    const boomError = error.output;
 
-    return send(res, status, getErrorObject(status, message, error));
+    return res
+      .status(boomError.statusCode || 500)
+      .json(Object.assign(
+        boomError.payload,
+        error.data ? { details: error.data } : null
+      ));
   }
-
-  return send(res, DEFAULT_ERROR_STATUS, getErrorObject(DEFAULT_ERROR_STATUS, DEFAULT_MESSAGE));
+  res.status(error.status || 500).json({
+    statusCode: error.status || 500,
+    error: error.name,
+    message: error.message,
+  });
 };
-
-function getErrorObject(status, message, originalObject) {
-  const errorObject = {
-    code: status,
-    message,
-  };
-
-  if (enviroment === 'development') {
-    errorObject.error = originalObject;
-  }
-
-  return errorObject;
-}
-
-function send(res, status, errorObject) {
-  res.status(status).json(errorObject);
-}
