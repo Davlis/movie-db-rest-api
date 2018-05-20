@@ -26,7 +26,7 @@ export async function create(req, res) {
     body
   });
 
-  res.json(comment);
+  res.status(201).json(comment);
 }
 
 export async function one(req, res) {

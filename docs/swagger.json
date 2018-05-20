@@ -284,7 +284,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Returns movie object with additional data fetched from external API",
             "schema": {
               "$ref": "#/definitions/MovieResponse"
@@ -425,7 +425,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Comment succesfully created.",
             "schema": {
               "$ref": "#/definitions/CommentResponse"

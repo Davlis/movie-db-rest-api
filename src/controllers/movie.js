@@ -23,7 +23,7 @@ export async function create(req, res) {
     data
   });
 
-  res.json(movie);
+  res.status(201).json(movie);
 }
 
 export async function one(req, res) {

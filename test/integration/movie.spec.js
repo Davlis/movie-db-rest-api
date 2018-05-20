@@ -85,11 +85,11 @@ describe('POST /movies', () => {
       .expect(400);
   });
 
-  it('should return 200 OK', async () => {
+  it('should return 201 CREATED', async () => {
     await request(app)
       .post('/movies')
       .send({ title: 'The Green Mile' })
-      .expect(200);
+      .expect(201);
   });
 
   it('should return object with title', async () => {
