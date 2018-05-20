@@ -37,7 +37,7 @@ Value of this ```MONGO_URL``` key should follow conventions:
 `mongodb://<dbuser>:<dbpassword>@<address>:<port>/<dbname>`
 
 # Documentation
-API documentation was made by using Swagger framework, you can found it on [/docs](https://movie-db-rest-api.herokuapp.com/docs/) route
+API documentation was made by using Swagger framework, you can find it on [/docs](https://movie-db-rest-api.herokuapp.com/docs/) route
 
 
 # OMBDApi
