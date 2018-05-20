@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import generateConfig from './config';
 import initDatabase from './database';
+import { omdbapi } from './providers';
+
 import router from './routes';
 
 import errorHandler from './middlewares/negativeResponse';
@@ -11,20 +13,24 @@ import noRouteHandler from './middlewares/noRoute';
 const config = generateConfig();
 
 const { connection, models } = initDatabase(config);
-const depedencies = { connection, models };
 
-const app = initApp(config, depedencies);
+const depedencies = { connection, models };
+const providers = { omdbapi };
+
+const app = initApp(config, depedencies, providers);
 
 app.listen(config.port, () => {
   console.log(`Server listening on port: ${config.port}`);
 });
 
-export default function initApp(config, depedencies) {
+export default function initApp(config, depedencies, providers) {
   const app = express();
 
   app.set('config', config);
   app.set('connection', depedencies.connection);
   app.set('models', depedencies.models);
+
+  app.set('providers', providers);
 
   app.use(logger('dev'));
   app.use(bodyParser.json());

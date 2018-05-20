@@ -1,6 +1,5 @@
 import { notFound } from 'boom';
 import { assertOrThrow } from '../utils';
-import omdbapi from '../providers/omdbapi';
 
 export async function list(req, res) {
   const { offset, limit } = req.query;
@@ -19,6 +18,7 @@ export async function one(req, res) {
 
 export async function create(req, res) {
   const { Movie } = req.app.get('models');
+  const { omdbapi } = req.app.get('providers');
   const { title } = req.body;
   const data = await omdbapi(title);
   const movie = await Movie.create({
