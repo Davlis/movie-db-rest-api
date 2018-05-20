@@ -6,14 +6,14 @@ export default (schema) => {
     if (schema.params) {
       const validation = Joi.validate(req.params, schema.params, { abortEarly: false, stripUnknown: true });
       if (validation.error) {
-        throw badRequest('Validation Error', validation.error.details);
+        throw badRequest('Validation Error', validation.error.details[0].message);
       }
     }
 
     if (schema.query) {
       const validation = Joi.validate(req.query, schema.query, { abortEarly: false, stripUnknown: true });
       if (validation.error) {
-        throw badRequest('Validation Error', validation.error.details);
+        throw badRequest('Validation Error', validation.error.details[0].message);
       }
       req.query = validation.value;
     }
@@ -21,7 +21,7 @@ export default (schema) => {
     if (schema.body) {
       const validation = Joi.validate(req.body, schema.body, { abortEarly: false, stripUnknown: true });
       if (validation.error) {
-        throw badRequest('Validation Error', validation.error.details);
+        throw badRequest('Validation Error', validation.error.details[0].message);
       }
       req.body = validation.value;
     }

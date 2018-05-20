@@ -10,6 +10,10 @@ import router from './routes';
 import errorHandler from './middlewares/negativeResponse';
 import noRouteHandler from './middlewares/noRoute';
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../docs/swagger.json';
+
+
 export default function initApp(config, depedencies, providers) {
   const app = express();
 
@@ -23,6 +27,7 @@ export default function initApp(config, depedencies, providers) {
   app.use(logger('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   app.use(router);
 
   app.use(errorHandler);

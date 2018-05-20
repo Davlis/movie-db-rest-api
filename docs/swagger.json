@@ -1,0 +1,533 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Movie Storage REST API",
+    "description": "Movie Storage REST API documentation ",
+    "version": "1.0.0",
+    "termsOfService": "",
+    "contact": {
+      "email": "ddewid@gmail.com"
+    }
+  },
+  "basePath": "/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "Operation on movies"
+    },
+    {
+      "name": "Comments",
+      "description": "Operation on comments"
+    }
+  ],
+  "definitions": {
+    "MovieResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "5b019c90daa3f623f0d6e76c"
+        },
+        "title": {
+          "type": "string",
+          "example": "Django"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "Title": {
+              "type": "string",
+              "example": "Django"
+            },
+            "year": {
+              "type": "string",
+              "example": "1966"
+            },
+            "Rated": {
+              "type": "string",
+              "example": "NOT RATED"
+            },
+            "Released": {
+              "type": "string",
+              "example": "01 Dec 1966"
+            },
+            "Runtime": {
+              "type": "string",
+              "example": "92"
+            },
+            "Genre": {
+              "type": "string",
+              "example": "Action, Western"
+            },
+            "Director": {
+              "type": "string",
+              "example": "Sergio Corbucci"
+            },
+            "Writer": {
+              "type": "string",
+              "example": "Sergio Corbucci (story), Bruno Corbucci (story), Sergio Corbucci (screenplay), Bruno Corbucci (screenplay), Franco Rossetti (screenplay in collaboration with), Piero Vivarelli (screenplay in collaboration with), Geoffrey Copleston (English version by)"
+            },
+            "Actors": {
+              "type": "string",
+              "example": "Franco Nero, José Bódalo, Loredana Nusciak, Ángel Álvarez"
+            },
+            "Plot": {
+              "type": "string",
+              "example": "A coffin-dragging gunslinger and a half-breed prostitute become embroiled in a bitter feud between a Klan of Southern racists and a band of Mexican Revolutionaries."
+            },
+            "Language": {
+              "type": "string",
+              "example": "Italian"
+            },
+            "Country": {
+              "type": "string",
+              "example": "Italy, Spain"
+            },
+            "Awards": {
+              "type": "string",
+              "example": "N/A"
+            },
+            "Poster": {
+              "type": "string",
+              "example": "https://ia.media-imdb.com/images/M/MV5BMTA4M2NmZTgtOGJlOS00NDExLWE4MzItNWQxNTRmYzIzYmM0L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"
+            },
+            "Ratings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Source": {
+                    "type": "string",
+                    "example": "Internet Movie Database"
+                  },
+                  "Value": {
+                    "type": "string",
+                    "example": "7.3/10"
+                  }
+                }
+              }
+            },
+            "Metascore": {
+              "type": "string",
+              "example": "N/A"
+            },
+            "imdbRating": {
+              "type": "string",
+              "example": "7.3"
+            },
+            "imdbVotes": {
+              "type": "string",
+              "example": "20,810"
+            },
+            "imdbID": {
+              "type": "string",
+              "example": "tt0060315"
+            },
+            "Type": {
+              "type": "string",
+              "example": "movie"
+            },
+            "DVD": {
+              "type": "string",
+              "example": "24 Sep 2002"
+            },
+            "BoxOffice": {
+              "type": "string",
+              "example": "$25,097"
+            },
+            "Production": {
+              "type": "string",
+              "example": "Rialto Pictures"
+            },
+            "Website": {
+              "type": "string",
+              "example": "http://www.rialtopictures.com/django"
+            },
+            "Response": {
+              "type": "string",
+              "example": "True"
+            }
+          }
+        }
+      }
+    },
+    "CommentResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "5b01a1061697f828dd0ab946"
+        },
+        "movieId": {
+          "type": "string",
+          "example": "5b019c90daa3f623f0d6e76c"
+        },
+        "body": {
+          "type": "string",
+          "example": "Nice movie"
+        }
+      }
+    },
+    "MovieNotFound": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 404
+        },
+        "error": {
+          "type": "string",
+          "example": "Not Found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Movie Not Found"
+        }
+      }
+    },
+    "CommentNotFound": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 404
+        },
+        "error": {
+          "type": "string",
+          "example": "Not Found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Comment Not Found"
+        }
+      }
+    },
+    "MovieBadRequest": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 400
+        },
+        "error": {
+          "type": "string",
+          "example": "Bad Request"
+        },
+        "message": {
+          "type": "string",
+          "example": "Validation Error"
+        },
+        "details": {
+          "type": "string",
+          "example": "title is required"
+        }
+      }
+    },
+    "CommentBadRequest": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 400
+        },
+        "error": {
+          "type": "string",
+          "example": "Bad Request"
+        },
+        "message": {
+          "type": "string",
+          "example": "Validation Error"
+        },
+        "details": {
+          "type": "string",
+          "example": "body is required"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/movies": {
+      "post": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Fetch new movie from external API and add to database",
+        "description": "Returned movie with additional information fetched from external API.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "description": "Movie title",
+            "schema": {
+              "type": "object",
+              "required": [
+                "title"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Django"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns movie object with additional data fetched from external API",
+            "schema": {
+              "$ref": "#/definitions/MovieResponse"
+            }
+          },
+          "400": {
+            "description": "Validation error.",
+            "schema": {
+              "$ref": "#/definitions/MovieBadRequest"
+            }
+          },
+          "404": {
+            "description": "Movie was not found.",
+            "schema": {
+              "$ref": "#/definitions/MovieNotFound"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Fetch movie list.",
+        "description": "Fetch movie list with additional data from database",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "sort",
+            "type": "string",
+            "description": "title, -title",
+            "default": "title"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "number",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "number",
+            "default": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns 20 movies by default.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "docs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/MovieResponse"
+                  }
+                },
+                "total": {
+                  "type": "number",
+                  "example": 1
+                },
+                "limit": {
+                  "type": "number",
+                  "example": 20
+                },
+                "offset": {
+                  "type": "number",
+                  "example": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get movie information.",
+        "description": "Returns movie information",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "example": "5b019c90daa3f623f0d6e76c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie succesfully fetched.",
+            "schema": {
+              "$ref": "#/definitions/MovieResponse"
+            }
+          },
+          "404": {
+            "description": "Movie Not Found.",
+            "schema": {
+              "$ref": "#/definitions/MovieNotFound"
+            }
+          }
+        }
+      }
+    },
+    "/comments": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Add comment to a movie.",
+        "description": "Returns newly created comment.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "required": true,
+            "description": "Comment text body and movieId.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "movieId",
+                "body"
+              ],
+              "properties": {
+                "movieId": {
+                  "type": "string",
+                  "example": "5b0190b924914f0ece0693a9"
+                },
+                "body": {
+                  "type": "string",
+                  "example": "Nice movie"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment succesfully created.",
+            "schema": {
+              "$ref": "#/definitions/CommentResponse"
+            }
+          },
+          "400": {
+            "description": "Validation error.",
+            "schema": {
+              "$ref": "#/definitions/CommentBadRequest"
+            }
+          },
+          "404": {
+            "description": "Movie provided in body was not found in database.",
+            "schema": {
+              "$ref": "#/definitions/MovieNotFound"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Fetch list of comments.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "movieId",
+            "required": false,
+            "description": "Filter comments by movieId.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns comments array.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "docs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CommentResponse"
+                  }
+                },
+                "total": {
+                  "type": "number",
+                  "example": 1
+                },
+                "limit": {
+                  "type": "number",
+                  "example": 20
+                },
+                "offset": {
+                  "type": "number",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Movie provided in query was not found in database.",
+            "schema": {
+              "$ref": "#/definitions/MovieNotFound"
+            }
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Get comment information.",
+        "description": "Returns comment information",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "example": "5b01a1061697f828dd0ab946"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment succesfully fetched.",
+            "schema": {
+              "$ref": "#/definitions/CommentResponse"
+            }
+          },
+          "404": {
+            "description": "Comment Not Found.",
+            "schema": {
+              "$ref": "#/definitions/CommentNotFound"
+            }
+          }
+        }
+      }
+    }
+  }
+}
