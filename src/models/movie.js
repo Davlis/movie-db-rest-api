@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     required: false,
     type: Object
   }
-});
+}, { versionKey: false });
 
 schema.plugin(mongoosePaginate);
 

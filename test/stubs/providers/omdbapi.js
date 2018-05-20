@@ -4,7 +4,7 @@ export default async function searchByTitle(title) {
     'xxx': { "Title": "xXx", "Year": "2002", "Rated": "PG-13", "Released": "09 Aug 2002", "Runtime": "124 min", "Genre": "Action, Adventure, Thriller", "Director": "Rob Cohen", "Writer": "Rich Wilkes", "Actors": "Vin Diesel, Asia Argento, Marton Csokas, Samuel L. Jackson", "Plot": "An extreme sports athlete, Xander Cage, is recruited by the government on a special mission.", "Language": "English, German, Spanish, Russian, Czech", "Country": "USA", "Awards": "4 wins & 14 nominations.", "Poster": "https://ia.media-imdb.com/images/M/MV5BNzZjZmM1ZDctNDhlZi00Mzk1LWFjNWItYzIxNGY2OWYzYjJmXkEyXkFqcGdeQXVyNjQ2MjQ5NzM@._V1_SX300.jpg", "Ratings": [{ "Source": "Internet Movie Database", "Value": "5.9/10" }, { "Source": "Rotten Tomatoes", "Value": "48%" }, { "Source": "Metacritic", "Value": "48/100" }], "Metascore": "48", "imdbRating": "5.9", "imdbVotes": "158,997", "imdbID": "tt0295701", "Type": "movie", "DVD": "31 Dec 2002", "BoxOffice": "$141,134,092", "Production": "Columbia Pictures", "Website": "http://www.sonypictures.com/movies/triplex/", "Response": "True" }
   };
 
-  const normalizedTitle = title.toLowercase();
+  const normalizedTitle = (title && title.toLowerCase()) || '';
 
   return storedMovies[normalizedTitle] || null;
 }

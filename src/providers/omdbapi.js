@@ -10,7 +10,7 @@ export default async function searchByTitle(title) {
     title
   });
   if (data.Error) {
-    return {};
+    return null;
   }
   return data;
 }

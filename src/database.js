@@ -11,6 +11,7 @@ export default (config) => {
   };
 
   return {
+    mongoose,
     connection: mongoose.connection,
     connect,
     models
