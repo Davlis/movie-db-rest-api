@@ -10,19 +10,6 @@ import router from './routes';
 import errorHandler from './middlewares/negativeResponse';
 import noRouteHandler from './middlewares/noRoute';
 
-const config = generateConfig();
-
-const { connection, models } = initDatabase(config);
-
-const depedencies = { connection, models };
-const providers = { omdbapi };
-
-const app = initApp(config, depedencies, providers);
-
-app.listen(config.port, () => {
-  console.log(`Server listening on port: ${config.port}`);
-});
-
 export default function initApp(config, depedencies, providers) {
   const app = express();
 
@@ -41,4 +28,19 @@ export default function initApp(config, depedencies, providers) {
   app.use(noRouteHandler);
 
   return app;
+}
+
+if (!module.parent) {
+  const config = generateConfig();
+
+  const { connection, models } = initDatabase(config);
+
+  const depedencies = { connection, models };
+  const providers = { omdbapi };
+
+  const app = initApp(config, depedencies, providers);
+
+  app.listen(config.port, () => {
+    console.log(`Server listening on port: ${config.port}`);
+  });
 }
