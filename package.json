@@ -50,6 +50,10 @@
   "jest": {
     "unmockedModulePathPatterns": [
       "/node_modules/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
     ]
   },
   "babel": {
