@@ -2,9 +2,15 @@ import { notFound } from 'boom';
 import { assertOrThrow } from '../utils';
 
 export async function list(req, res) {
-  const { offset, limit } = req.query;
+  const { offset, limit, movieId } = req.query;
   const { Comment } = req.app.get('models');
-  const comments = await Comment.paginate({}, { offset, limit });
+
+  const query = {};
+  if (movieId) {
+    Object.assign({}, { movieId });
+  }
+
+  const comments = await Comment.paginate(query, { offset, limit });
   res.json(comments);
 }
 
