@@ -1,14 +1,14 @@
 # Stack
 
-`Server:` `Express.js` - I chose Express because of its flexibility and minimalism.
+`Server:` `Express.js` - flexibility and minimalism.
 
 `Database:` `MongoDB` - I chose MongoDB (NoSQL) solution over SQL because I could host database on [mlab](http://mlab.com) with one click, also because I didn't need here any transactions and I don't have here many relations.
 
-`ODM:` `Mongoose` - I chose Mongoose because of its data validation, plugins and data abstraction.
+`ODM:` `Mongoose` - data validation, plugins and data abstraction.
 
-`Test:` `Jest` - I chose Jest because I wanted to try something new.
+`Test:` `Jest` - I wanted to try something new, because I always used mocha
 
-`Documentation:` `Swagger UI` - I chose Swagger because I admire it for design, and possibility of automation.
+`Documentation:` `Swagger UI` - I admire it for design, and possibility of automation.
 
 # Live version
 API is hosted on [Heroku](https://movie-db-rest-api.herokuapp.com/docs/), so you can play with it without installing.
@@ -28,11 +28,11 @@ App is running by default on port `3000`.
 
 # Database
 
-You don't need to have MongoDB installed on your device if you using example enviroments.
+You don't need to have MongoDB installed on your device if you are using example enviroments.
 
 If you want to use your own MongoDB then you should provide proper entry for ```MONGO_URL``` key in ```.env``` file. 
 
-Value of this ```MONGO_URL``` key should follow convenction:
+Value of this ```MONGO_URL``` key should follow conventions:
 
 `mongodb://<dbuser>:<dbpassword>@<address>:<port>/<dbname>`
 
