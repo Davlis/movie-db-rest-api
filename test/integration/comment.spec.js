@@ -25,7 +25,6 @@ afterAll(async () => {
 });
 
 describe('GET /comments', () => {
-
   it('should return 200 OK', async () => {
     await request(app)
       .get('/comments')
