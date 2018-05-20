@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { Comment, Movie } from './models';
 
 export default (config) => {
-  mongoose.connect(config.mongo.url);
+  const connect = mongoose.connect(config.mongo.url);
 
   const models = {
     Movie,
@@ -12,6 +12,7 @@ export default (config) => {
 
   return {
     connection: mongoose.connection,
+    connect,
     models
   };
 };

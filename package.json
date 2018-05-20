@@ -5,8 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "postinstall": "babel src -d dist",
-    "test": "jest --verbose --bail",
-    "test:w": "jest --verbose --bail --watch",
+    "test": "node test/setup-enviroment && jest --verbose --bail",
+    "test:w": "node test/setup-enviroment && jest --verbose --bail --watch",
     "build": "babel src test -d dist",
     "start": "node --harmony dist/server",
     "watch": "babel -w src -d dist",
