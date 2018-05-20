@@ -14,14 +14,6 @@ export async function list(req, res) {
   res.json(comments);
 }
 
-export async function one(req, res) {
-  const { Comment } = req.app.get('models');
-  const { id } = req.params;
-  const comment = await Comment.findOne({ _id: id });
-  assertOrThrow(comment, notFound, 'Comment not found');
-  res.json(comment);
-}
-
 export async function create(req, res) {
   const { Movie, Comment } = req.app.get('models');
   const { movieId, body } = req.body;
@@ -33,6 +25,16 @@ export async function create(req, res) {
     movieId,
     body
   });
+
+  res.json(comment);
+}
+
+export async function one(req, res) {
+  const { Comment } = req.app.get('models');
+  const { id } = req.params;
+
+  const comment = await Comment.findOne({ _id: id });
+  assertOrThrow(comment, notFound, 'Comment not found');
 
   res.json(comment);
 }

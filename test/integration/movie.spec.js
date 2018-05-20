@@ -18,12 +18,13 @@ const { Movie } = models;
 const mocks = {};
 
 beforeAll(async () => {
-  const titles = ['ABC', 'DEF'];
+  const titles = ['xxx', 'b'];
   mocks.movies = await Promise.all(titles.map(title => Movie.create({ title })));
 });
 
 afterAll(async () => {
-  connection.close();
+  await connection.db.dropDatabase();
+  await connection.close();
 });
 
 describe('GET /movies', () => {
@@ -57,7 +58,6 @@ describe('GET /movies', () => {
       .get('/movies');
     expect(response.body.docs).to.have.length(2);
   });
-
   it('should return 400 Bad Request when given id not ObjectId', async () => {
     await request(app)
       .get(`/movies/${'123'}`)
@@ -89,22 +89,22 @@ describe('POST /movies', () => {
   it('should return 200 OK', async () => {
     await request(app)
       .post('/movies')
-      .send({ title: 'Somemoooooovie' })
+      .send({ title: 'The Green Mile' })
       .expect(200);
   });
 
   it('should return object with title', async () => {
     const response = await request(app)
       .post('/movies')
-      .send({ title: 'Custom' });
-    expect(response.body.title).equal('Custom');
+      .send({ title: 'Shrek' });
+    expect(response.body.title).equal('Shrek');
   });
 
-  it('should return object without additional data', async () => {
-    const response = await request(app)
+  it('should return 404 NOT FOUND when couldnt fetch movie information', async () => {
+    await request(app)
       .post('/movies')
-      .send({ title: 'Qweq' });
-    expect(response.body.data).equal(null);
+      .send({ title: 'Qweq' })
+      .expect(404);
   });
 
   it('should return object with additional data', async () => {

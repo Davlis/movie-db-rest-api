@@ -16,7 +16,7 @@ export default {
   },
   one: {
     params: {
-      id: Joi.string().regex(/^[a-fA-F0-9]{24}$/).required(),
+      id: Joi.string().regex(/^[a-fA-F0-9]{24}$/).required()
     }
   }
 };

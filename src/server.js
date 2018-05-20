@@ -14,6 +14,7 @@ export default function initApp(config, depedencies, providers) {
   const app = express();
 
   app.set('config', config);
+  app.set('router', router);
   app.set('connection', depedencies.connection);
   app.set('models', depedencies.models);
 

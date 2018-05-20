@@ -10,6 +10,7 @@ export default {
     query: {
       offset: Joi.number().integer().min(0).default(0),
       limit: Joi.number().integer().min(1).default(20),
+      sort: Joi.string().optional(),
     }
   },
   one: {

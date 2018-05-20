@@ -23,7 +23,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  connection.close();
+  await connection.db.dropDatabase();
+  await connection.close();
 });
 
 describe('GET /comments', () => {

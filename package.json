@@ -5,12 +5,13 @@
   "main": "src/server.js",
   "scripts": {
     "postinstall": "babel src -d dist",
-    "test": "node test/setup-enviroment && jest --verbose --bail",
+    "test": "node test/setup-enviroment && jest --verbose --bail --runInBand",
     "test:w": "node test/setup-enviroment && jest --verbose --bail --watch",
     "build": "babel src test -d dist",
     "start": "node --harmony dist/server",
     "watch": "babel -w src -d dist",
-    "watch-d": "babel -w src -d dist & nodemon --harmony dist/server"
+    "watch-d": "babel -w src -d dist & nodemon --harmony dist/server",
+    "drop-db": "node dist/tools/drop-db"
   },
   "repository": {
     "type": "git",
