@@ -4,15 +4,13 @@ import logger from 'morgan';
 import generateConfig from './config';
 import initDatabase from './database';
 import { omdbapi } from './providers';
-
 import router from './routes';
 
 import errorHandler from './middlewares/negativeResponse';
 import noRouteHandler from './middlewares/noRoute';
+import swaggerInit from './middlewares/swagger';
 
-import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
-
 
 export default function initApp(config, depedencies, providers) {
   const app = express();
@@ -27,7 +25,8 @@ export default function initApp(config, depedencies, providers) {
   app.use(logger('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.use(swaggerInit(router, '/docs', swaggerDocument));
+
   app.use(router);
 
   app.use(errorHandler);

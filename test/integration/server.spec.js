@@ -1,15 +1,12 @@
 import request from 'supertest';
 
-import generateConfig from '../../src/config';
-import initDatabase from '../../src/database';
-import { omdbapi } from '../../src/providers';
-import initApp from '../../src/server';
+import initalizeApp from '../helpers/initializeApp';
 
-const config = generateConfig();
-const { connection, models } = initDatabase(config);
-const depedencies = { connection, models };
-const providers = { omdbapi };
-const app = initApp(config, depedencies, providers);
+const {
+  models,
+  connection,
+  app
+} = initalizeApp();
 
 afterAll(async () => {
   await connection.close();

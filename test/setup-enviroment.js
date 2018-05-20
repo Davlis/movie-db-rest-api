@@ -2,7 +2,7 @@ const generateConfig = require('../dist/config').default;
 const initDatabase = require('../dist/database').default;
 
 const dotenvPath = `${__dirname}/.env`;
-const config = generateConfig();
+const config = generateConfig(dotenvPath);
 
 setup().catch(console.error);
 

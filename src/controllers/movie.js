@@ -16,7 +16,7 @@ export async function create(req, res) {
   const { title } = req.body;
 
   const data = await omdbapi(title);
-  assertOrThrow(data, notFound, `Couldn't fetch movie with title: ${title}`);
+  assertOrThrow(data, notFound, 'Movie Not Found');
 
   const movie = await Movie.create({
     title,
@@ -31,7 +31,7 @@ export async function one(req, res) {
   const { id } = req.params;
 
   const movie = await Movie.findOne({ _id: id });
-  assertOrThrow(movie, notFound, 'Movie not found');
+  assertOrThrow(movie, notFound, 'Movie Not Found');
 
   res.json(movie);
 }

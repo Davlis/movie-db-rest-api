@@ -4,8 +4,7 @@ import mongoosePaginate from 'mongoose-paginate';
 const schema = new mongoose.Schema({
   title: {
     required: true,
-    type: String,
-    index: { unique: true }
+    type: String
   },
   data: {
     required: false,

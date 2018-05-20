@@ -19,7 +19,7 @@ export async function create(req, res) {
   const { movieId, body } = req.body;
 
   const movie = await Movie.findOne({ _id: movieId });
-  assertOrThrow(movie, notFound, 'Movie not found');
+  assertOrThrow(movie, notFound, 'Movie Not Found');
 
   const comment = await Comment.create({
     movieId,
@@ -34,7 +34,7 @@ export async function one(req, res) {
   const { id } = req.params;
 
   const comment = await Comment.findOne({ _id: id });
-  assertOrThrow(comment, notFound, 'Comment not found');
+  assertOrThrow(comment, notFound, 'Comment Not Found');
 
   res.json(comment);
 }
