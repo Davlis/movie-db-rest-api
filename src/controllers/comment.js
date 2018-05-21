@@ -7,7 +7,7 @@ export async function list(req, res) {
 
   const query = {};
   if (movieId) {
-    Object.assign({}, { movieId });
+    Object.assign(query, { movieId });
   }
 
   const comments = await Comment.paginate(query, { offset, limit });
